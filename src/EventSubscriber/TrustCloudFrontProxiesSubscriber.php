@@ -16,12 +16,14 @@ class TrustCloudFrontProxiesSubscriber implements EventSubscriberInterface
     private HttpClientInterface $client;
     private CacheInterface $cache;
     private string $ipRangeDataUrl;
+    private int $expire;
 
-    public function __construct(CacheInterface $cache, HttpClientInterface $client, string $ipRangeDataUrl)
+    public function __construct(CacheInterface $cache, HttpClientInterface $client, string $ipRangeDataUrl, int $expire)
     {
         $this->cache = $cache;
         $this->client = $client;
         $this->ipRangeDataUrl = $ipRangeDataUrl;
+        $this->expire = $expire;
     }
 
     public static function getSubscribedEvents()
@@ -51,7 +53,7 @@ class TrustCloudFrontProxiesSubscriber implements EventSubscriberInterface
     {
         // Get the CloudFront IP addresses
         $proxies = $this->cache->get('cloudfront-proxy-ip-addresses', function (ItemInterface $item) {
-            $item->expireAfter(3600);
+            $item->expireAfter($this->expire);
 
             $res = $this->client->get($this->ipRangeDataUrl);
             $data = $response->toArray();
