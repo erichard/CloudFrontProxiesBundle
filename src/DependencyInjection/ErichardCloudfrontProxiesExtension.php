@@ -29,7 +29,7 @@ class ErichardCloudfrontProxiesExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('service.xml');
+        $loader->load('services.xml');
 
         $container
             ->getDefinition(TrustCloudFrontProxiesSubscriber::class)
