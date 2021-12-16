@@ -3,14 +3,12 @@
 namespace Erichard\CloudfrontProxiesBundle\DependencyInjection;
 
 use Erichard\CloudfrontProxiesBundle\EventSubscriber\TrustCloudFrontProxiesSubscriber;
-use Knp\Bundle\MarkdownBundle\MarkdownParserInterface;
-use Michelf\MarkdownInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Symfony\Component\Templating\EngineInterface;
 
 class ErichardCloudfrontProxiesExtension extends Extension
 {
