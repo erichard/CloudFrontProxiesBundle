@@ -53,24 +53,25 @@ class TrustCloudFrontProxiesSubscriber implements EventSubscriberInterface
     {
         // Get the CloudFront IP addresses
         $proxies = $this->cache->get('cloudfront-proxy-ip-addresses', function (ItemInterface $item) {
-            $item->expireAfter($this->expire);
+            $item->expiresAfter($this->expire);
 
-            $res = $this->client->get($this->ipRangeDataUrl);
+            $response = $this->client->request('GET', $this->ipRangeDataUrl);
             $data = $response->toArray();
 
             $cloudFrontRanges = array_filter($data['prefixes'], function($item) {
                 return 'CLOUDFRONT' === $item['service'];
             });
 
-            return array_map($cloudFrontRanges, function($item) {
+            return array_map(function($item) {
                 return $item['ip_prefix'];
-            });
+            }, $cloudFrontRanges);
         });
-        Request::setTrustedProxies(array_merge(Request::getTrustedProxies(), $proxies));
+
+        Request::setTrustedProxies(array_merge(Request::getTrustedProxies(), $proxies), Request::getTrustedHeaderSet());
     }
 
     protected function setCloudfrontHeaders(Request $request) 
     {
-        $request->headers->set('x-forwarded-proto', $request->headers->has('cloudfront-forwarded-proto'));
+        $request->headers->set('x-forwarded-proto', $request->headers->get('cloudfront-forwarded-proto'));
     }
 }

@@ -5,10 +5,11 @@
 
     <services>
         <service id="Erichard\CloudfrontProxiesBundle\EventSubscriber\TrustCloudFrontProxiesSubscriber">
-            <argument/>
-            <argument type="service" id="http_client"/>
-            <argument/>
-            <tag name="kernel.event_subscriber"  />
+            <argument type="service" id="cache.app" />
+            <argument type="service" id="http_client" />
+            <argument></argument>
+            <argument></argument>
+            <tag name="kernel.event_subscriber" />
         </service>
     </services>
 </container>

@@ -21,7 +21,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->addDefaultsIfNotSet()
             ->children()
-                ->scalarNode('cache')->defaultValue('cache.app')->end()
+                ->scalarNode('cache')->defaultNull()->end()
                 ->integerNode('expire')->defaultValue(3600)->end()
                 ->scalarNode('ip_range_url')->defaultValue('https://ip-ranges.amazonaws.com/ip-ranges.json')->end()
             ->end()

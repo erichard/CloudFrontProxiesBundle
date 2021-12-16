@@ -29,12 +29,18 @@ class ErichardCloudfrontProxiesExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
 
-        $container
-            ->getDefinition(TrustCloudFrontProxiesSubscriber::class)
-            ->replaceArgument(0, new Reference($config['cache']))
+        $definition = $container->getDefinition(TrustCloudFrontProxiesSubscriber::class);
+
+        $definition
             ->replaceArgument(2, $config['ip_range_url'])
             ->replaceArgument(3, $config['expire'])
         ;
 
+        if (null !== $config['cache']) {
+            $container
+                ->getDefinition(TrustCloudFrontProxiesSubscriber::class)
+                ->replaceArgument(0, new Reference($config['cache']))
+            ;
+        }
     }
 }
