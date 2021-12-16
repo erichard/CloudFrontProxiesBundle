@@ -1,0 +1,29 @@
+{
+    "name": "erichard/cloudfront-proxies-bundle",
+    "description": "Trusts the AWS Cloudfront proxies IP in your Symfony projects",
+    "type": "symfony-bundle",
+    "require": {
+        "symfony/framework-bundle": "^4.4.0 || ^5.0",
+        "symfony/http-client": "^4.4.0 || ^5.0"
+    },
+    "require-dev": {
+        "phpspec/prophecy-phpunit": "^2.0"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Erichard\\CloudfrontProxiesBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Erichard\\CloudfrontProxiesBundle\\Test\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Erwan Richard",
+            "email": "freelance@erwan-richard.tech"
+        }
+    ]
+}
