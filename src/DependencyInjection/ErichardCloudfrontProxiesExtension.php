@@ -36,7 +36,6 @@ class ErichardCloudfrontProxiesExtension extends Extension
             ->replaceArgument(0, new Reference($config['cache']))
             ->replaceArgument(2, $config['ip_range_url'])
             ->replaceArgument(3, $config['expire'])
-            ->addTag('kernel.event_subscriber')
         ;
 
     }
